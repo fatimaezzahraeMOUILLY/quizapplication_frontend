@@ -1,0 +1,127 @@
+.create-test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #f0f0f0 65%, #232A56 35%);
+  color: #000;
+  min-height: 100vh; /* S'assurer que la hauteur minimale prend toute la fenêtre */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* S'assurer que la barre de navigation prend toute la largeur */
+}
+
+.logo {
+  width: 100px;
+}
+
+.navbar nav a {
+  margin: 0 25px;
+  text-decoration: none;
+  color: #000;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+.navbar nav a:hover {
+  font-size: 1.2em; /* Augmentation de la taille du texte */
+  background-color: #ddd; /* Changement de couleur de fond */
+}
+
+.create-test-button {
+  background-color: #fff;
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: auto;
+  margin-right: 3%;
+  border: 2px solid #232A56;
+}
+
+.create-test-button:hover {
+  background-color: #232A56;
+  color: #fff;
+}
+
+.button2 {
+  color: #000;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 20%;
+  background-color: rgba(35, 42, 86, 0.66);
+}
+
+h1 {
+  margin-top: 15%;
+  font-size: 3.5em;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: rgba(35, 42, 86, 0.66);
+  text-align: center;
+  padding-bottom: 0%;
+}
+
+.form1-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 50%;
+  margin: 3%;
+  height: auto;
+}
+
+.form1 {
+  display: flex;
+  flex-direction: column;
+  max-height: 200px; /* Hauteur fixe pour le formulaire */
+  overflow-y: auto; /* Défilement vertical pour le formulaire */
+  margin-bottom: 0%;
+}
+
+.form1-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input, select, button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 1em;
+  margin: 10px;
+}
+
+input, select {
+  width: 250px;
+}
+
+.button {
+  width: 100%;
+  background-color: #232A56;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.button:hover {
+  background-color: #1d2048;
+}
+
+.candidate-list {
+  max-height: 130px; /* Ajustez cette hauteur selon vos besoins */
+  overflow-y: auto;
+  width: 100%;
+}

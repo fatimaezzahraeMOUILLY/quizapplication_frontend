@@ -1,0 +1,125 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../images/background.jpg'); /* Chemin vers votre image de fond */
+    background-size: cover;
+    color: #000; /* Couleur du texte */
+  }
+
+  .H2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000; /* Couleur du texte */
+    padding-top: 100px;
+    font-size:27px;
+  }
+  
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
+  }
+  
+  .logo img{
+    width: 170px; /* Largeur de votre logo */
+    height: 70px; /* Hauteur de votre logo */
+    margin-left: 30px; /* Marge à droite pour séparer le logo du texte */
+  }
+  
+  
+  .nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links li {
+    cursor: pointer;
+  }
+  
+  .about ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  .about ul li {
+    margin-right: 100px;
+    align-items: center;
+    cursor: pointer;
+    
+  }
+
+
+  
+  .login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Utilisez la hauteur de la vue pour centrer verticalement */
+
+  }
+  
+  .login-box {
+    background-color: rgba(255, 255, 255, 0.4); /* Fond transparent */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre */
+    text-align: center; /* Centrer le contenu horizontalement */
+  }
+  
+  .login-box h2 {
+    margin-bottom: 20px;
+    font-size: 35px;
+  }
+  
+  .login-box input {
+    width: 90%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+  }
+  
+  .login-box button {
+    width: 50%;
+    padding: 10px;
+    background-color: #232A56;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .footer {
+    background-color: #fff; /* Couleur de fond */
+    text-align: center;
+    width: 100%;
+  }
+
+
+.footer p {
+  font-size: 11px;
+  color: #000;
+  margin: 10px 0;
+}
+
+.footer .highlight {
+  font-weight: bold;
+  color: #232A56;
+}
+
+  
+  
