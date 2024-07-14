@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import './Login.css'; 
+import { TextField, Typography, Box, Button, AppBar, Toolbar } from '@mui/material';
 import logo from '../images/logo.png';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
-// Composant fonctionnel Login
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,60 +10,128 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ajoutez la logique de connexion ici
     console.log('Email:', email);
     console.log('Password:', password);
-    // Redirection après connexion réussie
     navigate('/dashboard');
   };
 
   return (
-    <div className="login-container">
-      {/* Barre de navigation */}
-      <div className="navbar">
-        <div className="logo">
-          <img src={logo} alt="Logo" />
-        </div>
-      </div>
-      <div className="H2">
-      <p >Bienvenue sur la plateforme de gestion des tests.</p>
-      <p >Veuillez entrer vos identifiants pour accéder à l'application</p>
-      </div>
-      {/* Formulaire de connexion */}
-      <div className="login-form">
-        <div className="login-box">
-          <h2>Login</h2>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        backgroundImage: `url(${require('../images/background.jpg')})`,
+        backgroundSize: 'cover',
+        color: '#000',
+      }}
+    >
+      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(255, 255, 255, 0.7)', boxShadow: 'none' }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <img src={logo} alt="Logo" style={{ width: 170, height: 70, marginLeft: 30 }} />
+        </Toolbar>
+      </AppBar>
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#000',
+          paddingTop: 10,
+          fontSize: 20,
+          marginBottom: 2,
+        }}
+      >
+        <Typography variant="h4">Bienvenue sur la plateforme de gestion des tests.</Typography>
+        <Typography variant="h5">Veuillez entrer vos identifiants pour accéder à l'application</Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          width: '35%',
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+            padding: 3,
+            borderRadius: 1,
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          <Typography variant="h2" sx={{ color: '#232A56' }}>Login</Typography>
+
           <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              required
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
-            <button type="submit" onClick={() => navigate('/Test1')}>Login</button>
+            <Box mb={2}>
+              <TextField
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                label="Email"
+                variant="outlined"
+                fullWidth
+                required
+                sx={{
+                  width: '95%',
+                }}
+              />
+            </Box>
+            <Box mb={2}>
+              <TextField
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                label="Password"
+                variant="outlined"
+                fullWidth
+                required
+                sx={{
+                  width: '95%',
+                }}
+              />
+            </Box>
+            <Button type="submit" variant="contained" sx={{ backgroundColor: '#232A56' }}>
+              Login
+            </Button>
           </form>
-        </div>
-      </div>
-      
-      <div className="footer">
-      <div>
-          <p><span className="highlight">Email</span> : contact@portnet.ma</p>
-          <p><span className="highlight">Fix</span> : +212 5 20 473 100</p>
-          <p><span className="highlight">Fax</span> : +212 5 20 473 101</p>
-        </div>
-        <div>
-          <p><span className="highlight">Adresse</span> : Enceinte Portuaire, Bâtiment de la Capitainerie, 2ème étage Port de Casablanca, 20000, Casablanca Maroc.</p>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          backgroundColor: '#fff',
+          textAlign: 'center',
+          width: '100%',
+          height: '11%',
+          position: 'absolute',
+          bottom: 0,
+          
+        }}
+      >
+        <Typography variant="body2">
+          <span style={{ color: '#232A56', fontWeight: 'bold' }}>Email</span> : <span style={{ color: '#000' }}>contact@portnet.ma</span>
+        </Typography>
+        <Typography variant="body2">
+          <span style={{ color: '#232A56', fontWeight: 'bold' }}>Fix</span> : <span style={{ color: '#000' }}>+212 5 20 473 100</span>
+        </Typography>
+        <Typography variant="body2">
+          <span style={{ color: '#232A56', fontWeight: 'bold' }}>Fax</span> : <span style={{ color: '#000' }}>+212 5 20 473 101</span>
+        </Typography>
+        <Typography variant="body2">
+          <span style={{ color: '#232A56', fontWeight: 'bold' }}>Adresse</span> : <span style={{ color: '#000' }}>Enceinte Portuaire, Bâtiment de la Capitainerie, 2ème étage Port de Casablanca, 20000, Casablanca Maroc.</span>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 
