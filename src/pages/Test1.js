@@ -1,16 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Typography, Select, MenuItem, FormControl, InputLabel, Container, AppBar, Toolbar, Button, Box, Link } from '@mui/material';
 import logo from '../images/logo.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Test1() {
   const navigate = useNavigate();
-  const [form1, setForm] = useState({
+  const [form, setForm] = useState({
     testName: '',
     domain: '',
     role: '',
     level: '',
   });
+
+  const [domains, setDomains] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [levels, setLevels] = useState([]);
+
+  // Fetch all domains on component mount
+  useEffect(() => {
+    axios.get('http://localhost:8088/api/themes')
+      .then(response => {
+        console.log("Data fetched from API:", response.data); // Log API data
+        if (Array.isArray(response.data)) {
+          setDomains(response.data);
+        } else {
+          console.error("La réponse de l'API n'est pas un tableau", response.data);
+        }
+      })
+      .catch(error => console.error("Error fetching data:", error));
+  }, []);
+
+  // Fetch roles and levels based on the selected domain
+  useEffect(() => {
+    if (form.domain) {
+      axios.get(`http://localhost:8088/api/roles/${form.domain}`)
+        .then(response => {
+          console.log("Roles fetched from API:", response.data); // Log API data
+          setRoles(response.data);
+        })
+        .catch(error => console.error("Error fetching roles:", error));
+
+      axios.get(`http://localhost:8088/api/levels/${form.domain}`)
+        .then(response => {
+          console.log("Levels fetched from API:", response.data); // Log API data
+          setLevels(response.data);
+        })
+        .catch(error => console.error("Error fetching levels:", error));
+    } else {
+      setRoles([]);
+      setLevels([]);
+    }
+  }, [form.domain]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +63,15 @@ function Test1() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form1);
+    if (form.testName && form.domain && form.role && form.level) {
+      console.log("Form submitted with data:", form); // Log form data
+      navigate('/Test2');
+    } else {
+      console.error("All fields are required");
+    }
   };
+
+  const isFormComplete = form.testName && form.domain && form.role && form.level;
 
   return (
     <Box
@@ -43,7 +91,7 @@ function Test1() {
           <img src={logo} alt="Logo" style={{ width: 170, height: 70, marginLeft: '2%' }} />
           <Box sx={{ display: 'flex', marginLeft: '15%' }}>
             <Link href="#home" onClick={() => navigate('/Login')} sx={{ margin: '15%', color: '#000', textDecoration: 'none', '&:hover': { fontSize: '1.1em' } }}>Home</Link>
-            <Link href="#tests" sx={{ margin: '15%', color: '#000', textDecoration: 'none', '&:hover': { fontSize: '1.1em' } }}>Tests</Link>
+            <Link href="#tests" onClick={() => navigate('/TestList')} sx={{ margin: '15%', color: '#000', textDecoration: 'none', '&:hover': { fontSize: '1.1em' } }}>Tests</Link>
             <Link href="#results" sx={{ margin: '15%', color: '#000', textDecoration: 'none', '&:hover': { fontSize: '1.1em' } }}>Résultats</Link>
             <Link href="#more" sx={{ margin: '15%', color: '#000', textDecoration: 'none', '&:hover': { fontSize: '1.1em' } }}>Plus</Link>
           </Box>
@@ -79,7 +127,7 @@ function Test1() {
             <TextField
               name="testName"
               placeholder="Entrer le nom du test"
-              value={form1.testName}
+              value={form.testName}
               onChange={handleChange}
               variant="outlined"
               sx={{ padding: 1, fontSize: '1em', margin: 1, width: 'calc(50% - 20px)' }}
@@ -88,14 +136,16 @@ function Test1() {
               <InputLabel>Choisir le domaine</InputLabel>
               <Select
                 name="domain"
-                value={form1.domain}
+                value={form.domain}
                 onChange={handleChange}
                 label="Choisir le domaine"
               >
                 <MenuItem value="">
                   <em>Choisir le domaine</em>
                 </MenuItem>
-                {/* Ajouter vos options de domaine ici */}
+                {domains.map(domain => (
+                  <MenuItem key={domain.id} value={domain.id}>{domain.name}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
@@ -104,32 +154,53 @@ function Test1() {
               <InputLabel>Choisir le rôle</InputLabel>
               <Select
                 name="role"
-                value={form1.role}
+                value={form.role}
                 onChange={handleChange}
                 label="Choisir le rôle"
+                disabled={!form.domain}
               >
                 <MenuItem value="">
                   <em>Choisir le rôle</em>
                 </MenuItem>
-                {/* Ajouter vos options de rôle ici */}
+                {roles.map(role => (
+                  <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>
+                ))}
               </Select>
             </FormControl>
             <FormControl variant="outlined" sx={{ padding: 1, fontSize: '1em', margin: 1, width: 'calc(50% - 20px)' }}>
               <InputLabel>Choisir le niveau</InputLabel>
               <Select
                 name="level"
-                value={form1.level}
+                value={form.level}
                 onChange={handleChange}
                 label="Choisir le niveau"
+                disabled={!form.domain}
               >
                 <MenuItem value="">
                   <em>Choisir le niveau</em>
                 </MenuItem>
-                {/* Ajouter vos options de niveau ici */}
+                {levels.map(level => (
+                  <MenuItem key={level.id} value={level.id}>{level.name}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
-          <Button type="submit" variant="contained" onClick={() => navigate('/Test2')} sx={{ width: '40%', backgroundColor: '#232A56', color: '#fff', cursor: 'pointer', borderRadius: 30, margin: '0 auto' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={!isFormComplete}
+            sx={{
+              width: '40%',
+              backgroundColor: isFormComplete ? '#232A56' : '#aaa',
+              color: '#fff',
+              cursor: 'pointer',
+              borderRadius: 30,
+              margin: '0 auto',
+              '&:hover': {
+                backgroundColor: isFormComplete ? '#1a1a4b' : '#aaa',
+              },
+            }}
+          >
             Suivant
           </Button>
         </form>

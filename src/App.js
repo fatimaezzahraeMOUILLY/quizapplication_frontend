@@ -5,6 +5,7 @@ import Test1 from './pages/Test1';
 import Test2 from './pages/Test2';
 import Test3 from './pages/Test3';
 import Condidatverification from './pages/Condidatverification';
+import TestList from './pages/TestList';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Test2" element={<Test2 />} />
         <Route path="/Test3" element={<Test3 />} />
         <Route path="/Condidatverification" element={<Condidatverification />} />
+        <Route path="/TestList" element={<TestList />} />
           
         </Routes>
       </Router>

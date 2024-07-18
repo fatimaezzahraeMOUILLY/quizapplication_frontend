@@ -78,7 +78,7 @@ function Condidatverification() {
               sx={{ width: '100%', marginBottom: 2 }}
             />
             {error && <Typography sx={{ color: 'red', marginBottom: 2, fontSize: '14px' }}>{error}</Typography>}
-            <Button type="submit" variant="contained" sx={{ backgroundColor: '#232A56', width: '45%', marginLeft: '53%' }}>
+            <Button type="submit" variant="contained" sx={{ backgroundColor: '#232A56', width: '45%', marginLeft: '53%', borderRadius: 30 }}>
               OK
             </Button>
           </Box>

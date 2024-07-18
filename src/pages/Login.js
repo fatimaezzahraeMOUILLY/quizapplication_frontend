@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { TextField, Typography, Box, Button, AppBar, Toolbar } from '@mui/material';
 import logo from '../images/logo.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    navigate('/dashboard');
+    try {
+      const response = await axios.post('http://localhost:8088/api/login', {
+        email,
+        password
+      });
+      setMessage('Login successful!');
+      navigate('/test1'); 
+    } catch (error) {
+      setMessage('Login failed. Please check your credentials.');
+      console.error('There was an error!', error);
+    }
   };
 
   return (
@@ -104,6 +114,7 @@ function Login() {
               Login
             </Button>
           </form>
+          {message && <p>{message}</p>}
         </Box>
       </Box>
 
